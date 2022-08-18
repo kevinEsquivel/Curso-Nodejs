@@ -4,3 +4,5 @@ node_modules/
 04-Tareas_HAcer/node_modules/
 05-ClimaApp/node_modules/
 05-ClimaApp/.env
+*.env
+.env
