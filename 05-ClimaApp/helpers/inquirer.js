@@ -61,14 +61,14 @@ const leerInput = async (message) => {
 };
 
 //TODO: Listar tareas que quiero borrar ademas de seleeionar y preguntas si esta seguro
-const listadoTareasBorrar = async( tareas = [] )=>{
+const listadoLugares = async( lugares = [] )=>{
 //Map sirve para que por cada tarea de tareas va a retornar el id y lo demas dando 
 //arrys por separado, dependiendo de el numero de tareas, si hay 5 tareas de retorna
 //en choices 5 arreglos
-  const choices = tareas.map((tarea,i) =>{ 
+  const choices = lugares.map((lugar,i) =>{ 
     return{
-      value: tarea.id,
-      name: `${`${i+1}`.green}  ${tarea.desc}`
+      value: lugar.id,
+      name: `${`${i+1}`.green}  ${lugar.nombre}`
     }
   });
   //*Estoy agregando al final lo siguiente
@@ -76,11 +76,12 @@ const listadoTareasBorrar = async( tareas = [] )=>{
     value:'0',
     name:'0.-'.green+'Cancelar'
   });
+
   const preguntas=[
     {
       type: 'list',
       name: 'id',
-      message:'Borrar',
+      message:'Seleccione',
       choices
     }
   ]
@@ -128,7 +129,7 @@ module.exports = {
   inquirerMenu,
   pausa,
   leerInput,
-  listadoTareasBorrar,
+  listadoLugares,
   confirmar,
   mostrarListadoCheckList
 };
