@@ -1,10 +1,16 @@
-const express = require('express')
-const path = require('path')//es elmodulo de path
+const express = require('express');
+const path = require('path');//es elmodulo de path
 const hbs = require('hbs');
+require('dotenv').config();
 
 
-const app = express()
-const port = 8080
+const app = express();
+
+//!!!!!!! COSAS A CAMBIAR AL SUBIR A EL HOST
+//* 1.- AGREGAR EL PUERTO A VARIABLES DE ENTORNO
+//* 2.- AGREGAR EL SCRIPT DE START EN EL PACKAGE.JSON
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const port = process.env.PORT;
 
 //TODO: requise('hbs')  
 //*HANDLEBARS
@@ -23,8 +29,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //la carpeta  public tiene ventaja sobre las rutas
 
 app.get('/', (req, res) => {
-    res.render('home',{
+    res.render('home',{ //si eta informacion ira en cada pagina debe pasarse igual en cada pagina
         nombre:'Kevin',
+        titulo:'Curso nodeJS Excelente',
         edad:20
     });//*para Handlebars.js, la segunda es para las opciones
   //res.send('Hello  / kevin')
@@ -32,10 +39,20 @@ app.get('/', (req, res) => {
 
 //! se quito el generic.html cuanto tambien en los <a> se cambia por estas rutas
 app.get('/generic', (req, res) => {
-    res.sendFile(__dirname+'/public/generic.html'); 
+    //res.sendFile(__dirname+'/public/generic.html'); //esto es para cuando son html
+    res.render('generic',{
+        nombre:'Kevin',
+        titulo:'Curso nodeJS Excelente',
+        edad:20
+    });  //*esto es para hbs
 })
 app.get('/elements', (req, res) => {
-    res.sendFile(__dirname+'/public/elements.html'); 
+    //res.sendFile(__dirname+'/public/elements.html'); 
+    res.render('elements',{
+        nombre:'Kevin',
+        titulo:'Curso nodeJS Excelente',
+        edad:20
+    });  //*esto es para hbs
 })
 app.get('/hola-mundo', (req, res) => {
     res.send('hola mundo en su respectiva ruta')
