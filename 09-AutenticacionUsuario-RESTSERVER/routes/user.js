@@ -8,15 +8,18 @@ const {
   userPost,
   userDelete,
 } = require("../controllers/UserController");
-const router = Router();
+
 
 const { 
   esRolValido,
   emailValidation,
   existeId } = require("../helpers/db-validators");
+  
 const { validarCampos } = require("../middlewares/validar-campos");
+const { validarjwt } = require("../middlewares/validar-jwt");
+const { tieneRol } = require("../middlewares/validar-Roles");
 
-
+const router = Router();
 //esta configurado en serverjs en la funcion de rutas
 
 router.get("/", userGet); //estoy llamando a la referenia del archivo
@@ -40,6 +43,8 @@ router.post("/",[
 
 ], userPost);
 router.delete("/:id",[
+  validarjwt,
+  tieneRol('ADMIN_ROLE','USER_ROLE'), //con esto puedo elejir entre 2 roles de usuario
   check('id','No es un id valido de Mongo').isMongoId(),
   check('id').custom(existeId),
   validarCampos

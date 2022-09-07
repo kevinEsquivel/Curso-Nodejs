@@ -34,7 +34,8 @@ const UsuarioSchema= Schema({
 })
 //metodos para sobreescribir metodods
 UsuarioSchema.methods.toJSON = function(){//debe ser de este tipo de funciones
-const {__v,password,...usuario}= this.toObject();
+const {__v,password,_id,...usuario}= this.toObject();
+usuario.uid = _id
 return usuario; // es lo que estaba despues de los puntos
 }
 

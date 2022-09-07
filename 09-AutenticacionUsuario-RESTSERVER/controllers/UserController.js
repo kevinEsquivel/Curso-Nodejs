@@ -70,15 +70,14 @@ const userPost = async (req, res = response) => {
 };
 const userDelete = async(req = request, res = response) => {
   const { id } = req.params;
+  
+  //!esto viene desde Validar-jwt
+  const uid = req.uid;
 
   //*Borrar fisicamente el documento
   //const usuario= await Usuario.findByIdAndDelete(id); //!ESTO NO SE HACE, NADA SE BORRA DE UNA BASE DE DATOS
-
   const usuario = await Usuario.findByIdAndUpdate(id,{estado:false}); //*el segundo elemento cambia el estado a false de ese id
-
-
   res.json({
-
     usuario
   });
 };
